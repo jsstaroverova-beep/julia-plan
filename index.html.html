@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мой план снижения веса — Юлия</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --card: #22263a;
+    --accent: #7c6af5;
+    --accent2: #4fd1c5;
+    --accent3: #f6ad55;
+    --accent4: #fc8181;
+    --accent5: #68d391;
+    --text: #e8eaf6;
+    --muted: #9da3c0;
+    --border: #2e3250;
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --green: #34d399;
+    --blue: #60a5fa;
+    --cortisol: #e879f9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a1d27 0%, #16213e 50%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+  .hero p { color: var(--muted); font-size: 16px; }
+  .hero .badge-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .badge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 600;
+  }
+  .badge.warn { color: var(--cortisol); border-color: rgba(232,121,249,0.35); background: rgba(232,121,249,0.08); }
+
+  /* CORTISOL BANNER */
+  .cortisol-banner {
+    background: linear-gradient(135deg, rgba(232,121,249,0.1), rgba(124,106,245,0.08));
+    border: 1px solid rgba(232,121,249,0.3);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .cb-icon { font-size: 28px; flex-shrink: 0; }
+  .cb-title { font-size: 16px; font-weight: 700; color: var(--cortisol); margin-bottom: 6px; }
+  .cb-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* CORTISOL TAG — inline badge */
+  .ctag {
+    display: inline-block;
+    background: rgba(232,121,249,0.12);
+    border: 1px solid rgba(232,121,249,0.3);
+    border-radius: 6px;
+    padding: 1px 7px;
+    font-size: 12px;
+    color: var(--cortisol);
+    font-weight: 600;
+    margin-left: 4px;
+    white-space: nowrap;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,17,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto; white-space: nowrap;
+    padding: 0 16px;
+  }
+  .nav a {
+    display: inline-block;
+    padding: 14px 18px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: var(--accent2); }
+
+  /* LAYOUT */
+  .container { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  /* SECTION TITLES */
+  .section-title {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 22px; font-weight: 700; color: var(--text);
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-title .icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--accent2); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 640px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* TRAINING */
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 20px; }
+  @media (max-width: 600px) { .week-grid { grid-template-columns: repeat(4, 1fr); } }
+  .day-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 8px; text-align: center;
+  }
+  .day-box.active { border-color: var(--accent); background: rgba(124,106,245,0.1); }
+  .day-box.pool { border-color: var(--accent2); background: rgba(79,209,197,0.1); }
+  .day-box.rest { border-color: var(--border); opacity: 0.5; }
+  .day-box .day-name { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-box .day-icon { font-size: 24px; margin: 6px 0; }
+  .day-box .day-label { font-size: 11px; font-weight: 600; }
+  .day-box.active .day-label { color: var(--accent); }
+  .day-box.pool .day-label { color: var(--accent2); }
+  .day-box.rest .day-label { color: var(--muted); }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    border-radius: 2px;
+  }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-item::before {
+    content: ''; position: absolute;
+    left: -26px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+  }
+  .tl-item .tl-time { font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tl-item .tl-text { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+  /* MEAL CONSTRUCTOR */
+  .meal-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+  .meal-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+    background: var(--card); border-bottom: 1px solid var(--border);
+  }
+  .meal-emoji { font-size: 28px; }
+  .meal-title { font-size: 16px; font-weight: 700; }
+  .meal-time { margin-left: auto; font-size: 13px; color: var(--accent); background: rgba(124,106,245,0.15); border-radius: 20px; padding: 3px 12px; font-weight: 600; white-space: nowrap; }
+  .meal-options { padding: 16px 20px; }
+  .meal-option {
+    display: flex; gap: 10px;
+    padding: 10px 14px; border-radius: 10px; margin-bottom: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    font-size: 14px; align-items: flex-start;
+  }
+  .meal-option:last-child { margin-bottom: 0; }
+  .opt-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .opt-text { color: var(--text); line-height: 1.5; }
+  .opt-why { color: var(--muted); font-size: 12px; margin-top: 3px; }
+
+  /* FOOD ZONES */
+  .food-zone { border-radius: 14px; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--border); }
+  .fz-header { padding: 12px 20px; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+  .fz-header.red { background: rgba(248,113,113,0.15); color: var(--red); border-bottom: 1px solid rgba(248,113,113,0.2); }
+  .fz-header.yellow { background: rgba(251,191,36,0.12); color: var(--yellow); border-bottom: 1px solid rgba(251,191,36,0.2); }
+  .fz-header.green { background: rgba(52,211,153,0.12); color: var(--green); border-bottom: 1px solid rgba(52,211,153,0.2); }
+  .fz-body { background: var(--surface); padding: 16px 20px; }
+  .fz-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .fz-item:last-child { border-bottom: none; }
+  .fz-item .fi-name { font-weight: 600; min-width: 150px; flex-shrink: 0; }
+  .fz-item .fi-why { color: var(--muted); font-size: 13px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .dot.red { background: var(--red); }
+  .dot.yellow { background: var(--yellow); }
+  .dot.green { background: var(--green); }
+
+  /* WATER */
+  .water-timeline { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .water-step {
+    background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.25);
+    border-radius: 12px; padding: 12px 16px; flex: 1; min-width: 130px; text-align: center;
+  }
+  .water-step .ws-time { color: var(--blue); font-weight: 700; font-size: 13px; }
+  .water-step .ws-amount { font-size: 20px; font-weight: 800; color: var(--text); margin: 4px 0; }
+  .water-step .ws-label { color: var(--muted); font-size: 12px; }
+
+  /* ANALYSES */
+  .analyses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .analyses-grid { grid-template-columns: 1fr; } }
+  .an-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .an-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .an-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .an-why { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .an-priority { margin-left: auto; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+  .an-priority.urgent { background: rgba(248,113,113,0.2); color: var(--red); }
+  .an-priority.soon { background: rgba(251,191,36,0.15); color: var(--yellow); }
+
+  /* SUPPLEMENTS */
+  .supp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 14px; }
+  .supp-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .supp-emoji { font-size: 24px; }
+  .supp-name { font-size: 15px; font-weight: 700; }
+  .supp-dose { margin-left: auto; font-size: 13px; color: var(--accent3); font-weight: 600; }
+  .supp-body { padding: 14px 18px; }
+  .supp-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .supp-tag { background: rgba(124,106,245,0.12); border: 1px solid rgba(124,106,245,0.25); border-radius: 8px; padding: 4px 10px; font-size: 13px; color: var(--muted); }
+  .supp-tag strong { color: var(--text); }
+  .supp-note { margin-top: 10px; font-size: 13px; color: var(--muted); font-style: italic; }
+
+  /* ALERT */
+  .alert { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); border-radius: 12px; padding: 16px 20px; margin-top: 40px; display: flex; gap: 12px; align-items: flex-start; }
+  .alert-icon { font-size: 22px; flex-shrink: 0; }
+  .alert-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .alert-text strong { color: var(--text); }
+
+  footer { text-align: center; padding: 32px 20px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+
+  ul.plain { list-style: none; }
+  ul.plain li { padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  ul.plain li:last-child { border-bottom: none; }
+  ul.plain li::before { content: '→ '; color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>🌿 Мой план снижения веса</h1>
+  <p>Юлия • 31 год • 125 кг • 168 см • HOMA-IR 4.1</p>
+  <div class="badge-row">
+    <span class="badge">🗓️ 4 месяца</span>
+    <span class="badge">🎯 −12–16 кг</span>
+    <span class="badge">⚡ Инсулинорезистентность</span>
+    <span class="badge warn">🌸 Усталость надпочечников</span>
+    <span class="badge">🫧 Без экстрима</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#training">🏋️ Тренировки</a>
+  <a href="#food">🍽️ Конструктор еды</a>
+  <a href="#limits">🚦 Что есть/не есть</a>
+  <a href="#water">💧 Вода</a>
+  <a href="#tests">🔬 Анализы</a>
+  <a href="#supps">💊 Добавки</a>
+</nav>
+
+<div class="container">
+
+<!-- CORTISOL BANNER -->
+<div class="cortisol-banner">
+  <div class="cb-icon">🌸</div>
+  <div>
+    <div class="cb-title">Усталость надпочечников — учитывается во всём плане</div>
+    <div class="cb-text">
+      7 лет стресса + алкоголь + плохое питание истощили надпочечники. Кортизол снижен (4.7 мкг/дл при норме 6.2–19.4). Везде в плане помечены продукты и действия, важные для восстановления кортизола: <span class="ctag">⚡ кортизол</span> — это сигнал включить в приём пищи.
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ТРЕНИРОВКИ ======================== -->
+<div id="training">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(124,106,245,0.15);">🏋️</div>
+    Как и когда тренироваться
+  </div>
+
+  <!-- Важно при усталости надпочечников -->
+  <div class="cortisol-banner" style="margin-bottom: 20px;">
+    <div class="cb-icon">⚠️</div>
+    <div>
+      <div class="cb-title">Главное изменение из-за надпочечников</div>
+      <div class="cb-text">При усталости надпочечников тяжёлая нагрузка истощает их сильнее. Правило: <strong style="color:var(--text)">после тренировки ты должна чувствовать себя лучше, чем до неё</strong>. Если хуже — нагрузка слишком высокая. Интервальный режим и длительные тренировки (40+ мин) — только после 2 месяцев стабилизации. Бассейн и лёгкий эллипс — лучший выбор сейчас.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <h3>📅 Расписание на неделю (месяц 1–2)</h3>
+    <div class="week-grid">
+      <div class="day-box active"><div class="day-name">Пн</div><div class="day-icon">🔵</div><div class="day-label">Эллипс</div></div>
+      <div class="day-box rest"><div class="day-name">Вт</div><div class="day-icon">😴</div><div class="day-label">Отдых</div></div>
+      <div class="day-box pool"><div class="day-name">Ср</div><div class="day-icon">🏊</div><div class="day-label">Бассейн</div></div>
+      <div class="day-box active"><div class="day-name">Чт</div><div class="day-icon">🔵</div><div class="day-label">Эллипс</div></div>
+      <div class="day-box rest"><div class="day-name">Пт</div><div class="day-icon">😴</div><div class="day-label">Отдых</div></div>
+      <div class="day-box pool"><div class="day-name">Сб</div><div class="day-icon">🏊</div><div class="day-label">Бассейн</div></div>
+      <div class="day-box rest"><div class="day-name">Вс</div><div class="day-icon">😴</div><div class="day-label">Отдых</div></div>
+    </div>
+    <p style="font-size:13px; color: var(--muted);">🔵 Эллипс — 2 раза в неделю &nbsp;|&nbsp; 🏊 Бассейн — 2 раза в неделю &nbsp;|&nbsp; 😴 Отдых — 3 дня (восстановление надпочечников)</p>
+  </div>
+
+  <div class="card" style="background: rgba(79,209,197,0.07); border-color: rgba(79,209,197,0.25); margin-bottom: 20px;">
+    <h3 style="color: var(--accent2);">⏰ Лучшее время — 10:00–13:00</h3>
+    <div class="grid-2">
+      <div>
+        <p style="font-size:14px; margin-bottom: 8px;"><strong style="color: var(--green);">✅ 10:00–13:00 — идеально</strong></p>
+        <p style="font-size:13px; color: var(--muted);">Кортизол должен быть в пике именно утром. Тренировка в это время помогает поддержать суточный ритм надпочечников. После завтрака — обязательно.</p>
+      </div>
+      <div>
+        <p style="font-size:14px; margin-bottom: 8px;"><strong style="color: var(--red);">❌ Натощак, после 19:00</strong></p>
+        <p style="font-size:13px; color: var(--muted);">Натощак = стресс для надпочечников. Поздно вечером = нарушение суточного ритма кортизола. Оба варианта ухудшают восстановление.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔵 Эллипс — прогрессия (щадящая)</h3>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-time">Неделя 1–2</div><div class="tl-text">10–15 мин · медленный темп · сопротивление 1–2 · 2×/нед</div></div>
+        <div class="tl-item"><div class="tl-time">Неделя 3–4</div><div class="tl-text">15–20 мин · 2–3×/нед · только если хорошее самочувствие</div></div>
+        <div class="tl-item"><div class="tl-time">Неделя 5–8</div><div class="tl-text">20–25 мин · 3×/нед · небольшое сопротивление</div></div>
+        <div class="tl-item"><div class="tl-time">Неделя 9–16</div><div class="tl-text">25–35 мин · 3–4×/нед · только если утром есть силы</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🏊 Бассейн — лучший выбор при надпочечниках</h3>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-time">Неделя 1–4</div><div class="tl-text">30–35 мин · ходьба в воде + медленный брасс · 2×/нед</div></div>
+        <div class="tl-item"><div class="tl-time">Неделя 5–8</div><div class="tl-text">35–40 мин · плыть + ходить чередовать · 2×/нед</div></div>
+        <div class="tl-item"><div class="tl-time">Неделя 9–16</div><div class="tl-text">40–45 мин · больше плавания · 2–3×/нед</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color: rgba(52,211,153,0.3);">
+      <h3 style="color: var(--green);">✅ Нагрузка нормальная, если:</h3>
+      <ul class="plain">
+        <li>После тренировки чувствуешь себя лучше</li>
+        <li>Можешь говорить предложениями</li>
+        <li>Завтра ходишь нормально</li>
+        <li>Пульс до 130–140 уд/мин</li>
+        <li>Нет усиления усталости на следующий день</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color: rgba(248,113,113,0.3);">
+      <h3 style="color: var(--red);">🛑 Стоп — это перегрузка надпочечников:</h3>
+      <ul class="plain">
+        <li>После тренировки хуже, чем до</li>
+        <li>На следующий день нет сил встать</li>
+        <li>Сильная одышка (не можешь говорить)</li>
+        <li>Боль в груди, давление в голове</li>
+        <li>Тяга к сладкому сразу после нагрузки</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== КОНСТРУКТОР ЕДЫ ======================== -->
+<div id="food">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(246,173,85,0.15);">🍽️</div>
+    Конструктор питания на день
+  </div>
+
+  <div class="card" style="background: rgba(232,121,249,0.07); border-color: rgba(232,121,249,0.25); margin-bottom: 24px;">
+    <p style="font-size: 14px;">
+      <strong style="color: var(--cortisol);">Правила питания при усталости надпочечников:</strong><br>
+      1. Завтрак — в течение <strong>первого часа после подъёма</strong>, не позже 9:00. Пропуск = стресс для надпочечников.<br>
+      2. Есть каждые 3–4 часа — длинные перерывы вызывают падение сахара, надпочечники вынуждены «тащить» организм через кортизол — истощение.<br>
+      3. Белок + сложные углеводы + полезные жиры — в каждый основной приём.<br>
+      4. <span class="ctag">⚡ кортизол</span> — метка на продуктах и блюдах, которые восстанавливают надпочечники.
+    </p>
+  </div>
+
+  <!-- Завтрак -->
+  <div class="meal-block">
+    <div class="meal-header">
+      <div class="meal-emoji">🍳</div>
+      <div>
+        <div class="meal-title">Завтрак</div>
+        <div style="font-size:12px; color: var(--muted);">Самый важный приём при усталости надпочечников</div>
+      </div>
+      <div class="meal-time">7:30 – 9:00</div>
+    </div>
+    <div class="meal-options">
+      <div class="meal-option">
+        <div class="opt-num">1</div>
+        <div>
+          <div class="opt-text">🥚 2 яйца варёных или омлет <span class="ctag">⚡ холин, витамин B для кортизола</span> + 1 кусок цельнозернового хлеба + зелёный чай</div>
+          <div class="opt-why">Яйца — ключевой продукт для надпочечников: холестерин в желтке нужен для синтеза кортизола</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">2</div>
+        <div>
+          <div class="opt-text">🥣 Овсянка на воде (5 ст.л.) + горсть орехов 20 г <span class="ctag">⚡ магний, витамин B5</span> + ½ авокадо <span class="ctag">⚡ B5, калий для надпочечников</span></div>
+          <div class="opt-why">Авокадо и орехи — главное «топливо» надпочечников на день</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">3</div>
+        <div>
+          <div class="opt-text">🧀 Творог 5–9% 150 г <span class="ctag">⚡ тирозин — строительный материал для кортизола</span> + замороженные ягоды 50 г <span class="ctag">⚡ витамин C</span> + чай</div>
+          <div class="opt-why">Тирозин из творога и белковых продуктов — одна из ключевых аминокислот для работы надпочечников</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">4</div>
+        <div>
+          <div class="opt-text">🍳 Омлет из 2–3 яиц <span class="ctag">⚡ холин, B-витамины</span> + болгарский перец, шпинат <span class="ctag">⚡ витамин C, магний</span> + 1 кусок цельнозернового хлеба</div>
+          <div class="opt-why">Шпинат богат магнием — он напрямую участвует в регуляции кортизола</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Перекус 1 -->
+  <div class="meal-block">
+    <div class="meal-header">
+      <div class="meal-emoji">🍎</div>
+      <div>
+        <div class="meal-title">Перекус 1</div>
+        <div style="font-size:12px; color: var(--muted);">Обязателен при усталости надпочечников — не пропускать</div>
+      </div>
+      <div class="meal-time">11:00 – 12:00</div>
+    </div>
+    <div class="meal-options">
+      <div class="meal-option">
+        <div class="opt-num">1</div>
+        <div>
+          <div class="opt-text">🍎 Яблоко <span class="ctag">⚡ калий, витамин C</span> + горсть орехов 25 г <span class="ctag">⚡ магний, цинк</span></div>
+          <div class="opt-why">Идеальный перекус: стабилизирует сахар, не нагружает надпочечники</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">2</div>
+        <div>
+          <div class="opt-text">🥚 1–2 варёных яйца <span class="ctag">⚡ холин, B-витамины</span> + огурец или помидор <span class="ctag">⚡ витамин C</span></div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">3</div>
+        <div>
+          <div class="opt-text">🟠 Апельсин или киви <span class="ctag">⚡ витамин C — надпочечники содержат самый высокий запас C в теле</span> + небольшая горсть тыквенных семечек <span class="ctag">⚡ цинк, магний</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Обед -->
+  <div class="meal-block">
+    <div class="meal-header">
+      <div class="meal-emoji">🥗</div>
+      <div>
+        <div class="meal-title">Обед</div>
+        <div style="font-size:12px; color: var(--muted);">Основной приём — обязательно белок + жир + углевод</div>
+      </div>
+      <div class="meal-time">13:00 – 15:00</div>
+    </div>
+    <div class="meal-options">
+      <div class="meal-option">
+        <div class="opt-num">1</div>
+        <div>
+          <div class="opt-text">🍗 Куриная грудка 150 г <span class="ctag">⚡ тирозин, B6</span> + гречка 6 ст.л. <span class="ctag">⚡ магний</span> + салат: огурец + помидор + болгарский перец <span class="ctag">⚡ витамин C</span> + 1 ч.л. оливкового масла</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">2</div>
+        <div>
+          <div class="opt-text">🐟 Скумбрия или горбуша запечённая 150 г <span class="ctag">⚡ омега-3 снижают воспалительную нагрузку на надпочечники, витамин D</span> + булгур 6 ст.л. + тушёные кабачки</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">3</div>
+        <div>
+          <div class="opt-text">🫘 Суп-пюре из чечевицы <span class="ctag">⚡ пантотеновая кислота B5 — ключевой витамин надпочечников, тирозин</span> + куриная грудка 100 г + 1 кусок цельнозернового хлеба</div>
+          <div class="opt-why">Бобовые — один из лучших источников витамина B5 для восстановления надпочечников</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">4</div>
+        <div>
+          <div class="opt-text">🦃 Индейка тушёная 150 г <span class="ctag">⚡ тирозин, B6</span> + морковь + свёкла запечённые <span class="ctag">⚡ поддержка надпочечников, антиоксиданты</span> + гречка 5 ст.л.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Перекус 2 -->
+  <div class="meal-block">
+    <div class="meal-header">
+      <div class="meal-emoji">🫐</div>
+      <div>
+        <div class="meal-title">Перекус 2</div>
+        <div style="font-size:12px; color: var(--muted);">Лёгкий, если есть голод — особенно важен при надпочечниках</div>
+      </div>
+      <div class="meal-time">17:00 – 18:00</div>
+    </div>
+    <div class="meal-options">
+      <div class="meal-option">
+        <div class="opt-num">1</div>
+        <div>
+          <div class="opt-text">🧀 Творог 100 г <span class="ctag">⚡ тирозин</span> + замороженные ягоды или клубника <span class="ctag">⚡ витамин C</span></div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">2</div>
+        <div>
+          <div class="opt-text">🥑 ½ авокадо <span class="ctag">⚡ B5, калий — надпочечники особенно нуждаются в калии</span> + несколько ломтиков огурца или ржаной хлебец</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">3</div>
+        <div>
+          <div class="opt-text">🍊 Апельсин или грейпфрут <span class="ctag">⚡ витамин C</span> + небольшая горсть грецких орехов <span class="ctag">⚡ омега-3, магний</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ужин -->
+  <div class="meal-block">
+    <div class="meal-header">
+      <div class="meal-emoji">🥦</div>
+      <div>
+        <div class="meal-title">Ужин</div>
+        <div style="font-size:12px; color: var(--muted);">Белок + овощи. До 20:00. Лёгкий — не перегружать надпочечники на ночь</div>
+      </div>
+      <div class="meal-time">19:00 – 20:00</div>
+    </div>
+    <div class="meal-options">
+      <div class="meal-option">
+        <div class="opt-num">1</div>
+        <div>
+          <div class="opt-text">🍗 Куриное бедро без кожи запечённое 130 г <span class="ctag">⚡ B6, тирозин</span> + брокколи на пару <span class="ctag">⚡ витамин C, магний</span></div>
+          <div class="opt-why">Брокколи — один из лучших источников витамина C после перца. Надпочечники расходуют его в первую очередь</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">2</div>
+        <div>
+          <div class="opt-text">🐟 Рыба на пару 150 г <span class="ctag">⚡ омега-3, витамин D</span> + шпинат тушёный или свежий <span class="ctag">⚡ магний — регулирует кортизол</span> + 1 ч.л. оливкового масла</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">3</div>
+        <div>
+          <div class="opt-text">🥚 Омлет 2–3 яйца <span class="ctag">⚡ холин, B-витамины</span> + болгарский перец <span class="ctag">⚡ витамин C — самый богатый источник</span> + помидор</div>
+          <div class="opt-why">Болгарский перец содержит витамина C в 3 раза больше, чем апельсин</div>
+        </div>
+      </div>
+      <div class="meal-option">
+        <div class="opt-num">4</div>
+        <div>
+          <div class="opt-text">🦃 Индейка 130 г <span class="ctag">⚡ тирозин</span> + кабачки тушёные + морковь <span class="ctag">⚡ бета-каротин, поддержка надпочечников</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ключевые продукты для кортизола -->
+  <div class="card" style="background: rgba(232,121,249,0.07); border-color: rgba(232,121,249,0.3); margin-top: 8px;">
+    <h3 style="color: var(--cortisol);">🌸 Продукты для восстановления надпочечников — топ-10</h3>
+    <div class="grid-2" style="margin-top: 12px;">
+      <div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Яйца</span> <span class="fi-why">Холестерин желтка → синтез кортизола; холин и B-витамины</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Авокадо</span> <span class="fi-why">Витамин B5, калий — надпочечники нуждаются в калии постоянно</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Болгарский перец</span> <span class="fi-why">Самый богатый источник витамина C — «топливо» надпочечников</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Брокколи, шпинат</span> <span class="fi-why">Витамин C + магний — оба нужны для выработки кортизола</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Орехи (грецкие, миндаль)</span> <span class="fi-why">Магний, цинк, B-витамины — восстанавливают надпочечники</span></div></div>
+      </div>
+      <div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Чечевица, нут</span> <span class="fi-why">Лучший источник витамина B5 (пантотеновая к-та) — ключевой для синтеза кортизола</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Жирная рыба</span> <span class="fi-why">Омега-3 снижают воспаление, которое истощает надпочечники</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Тыквенные семечки</span> <span class="fi-why">Цинк + магний — оба участвуют в гормональном балансе</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Морковь, свёкла</span> <span class="fi-why">Антиоксиданты, бета-каротин — защита надпочечников от стресса</span></div></div>
+        <div class="fz-item"><div class="dot" style="background:var(--cortisol);"></div><div><span class="fi-name">Квашеная капуста, кефир</span> <span class="fi-why">Пробиотики — снижают кортизол через кишечно-мозговую ось</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ЧТО ЕСТЬ / НЕ ЕСТЬ ======================== -->
+<div id="limits">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(248,113,113,0.15);">🚦</div>
+    Что убрать, что ограничить — и почему
+  </div>
+
+  <div class="food-zone">
+    <div class="fz-header red">🔴 Строго убрать на 4 месяца</div>
+    <div class="fz-body">
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Алкоголь — полностью</div><div class="fi-why">7 лет ежедневного алкоголя — главная причина истощения надпочечников. Алкоголь разрушает запасы витамина C, B5, B6, магния — всего, что нужно для кортизола. Полное исключение обязательно.</div></div>
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Кофе натощак</div><div class="fi-why">Кофе натощак резко поднимает кортизол → надпочечники «тратятся» ещё до еды. При усталости надпочечников — строго после завтрака, не раньше 9:00, не больше 1 чашки в день</div></div>
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Сахар и сладкое натощак</div><div class="fi-why">Резкий скачок сахара → надпочечники вынуждены реагировать кортизолом → истощение</div></div>
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Белый хлеб, выпечка, торты</div><div class="fi-why">Быстрые углеводы раскачивают сахар — дополнительная нагрузка на и без того уставшие надпочечники</div></div>
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Сладкие напитки, пакетированные соки</div><div class="fi-why">Жидкий сахар — самый быстрый способ дестабилизировать кортизол</div></div>
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Фастфуд, колбасы, сосиски</div><div class="fi-why">Трансжиры + добавки усиливают воспаление → дополнительный стресс для надпочечников</div></div>
+      <div class="fz-item"><div class="dot red"></div><div class="fi-name">Длинные перерывы без еды (5+ часов)</div><div class="fi-why">Падение сахара заставляет надпочечники экстренно вырабатывать кортизол — именно это их истощает сильнее всего</div></div>
+    </div>
+  </div>
+
+  <div class="food-zone">
+    <div class="fz-header yellow">🟡 Ограничить — с умом</div>
+    <div class="fz-body">
+      <div class="fz-item"><div class="dot yellow"></div><div class="fi-name">Банан 🍌</div><div class="fi-why">Много сахара (ГИ ~50). Хорошо: богат калием и B6 — нужны надпочечникам. Только ½ банана, утром, не натощак, не каждый день</div></div>
+      <div class="fz-item"><div class="dot yellow"></div><div class="fi-name">Кофе</div><div class="fi-why">Строго 1 чашка в день, только после завтрака (не раньше 9:00), без сахара. Кофе натощак — красная зона</div></div>
+      <div class="fz-item"><div class="dot yellow"></div><div class="fi-name">Виноград, манго, финики</div><div class="fi-why">Много сахара. Небольшая горсть до 15:00, редко (1–2 раза в неделю)</div></div>
+      <div class="fz-item"><div class="dot yellow"></div><div class="fi-name">Белый рис, макароны</div><div class="fi-why">Высокий ГИ — порция не больше горсти, не чаще 2 раз/нед, обязательно с белком</div></div>
+      <div class="fz-item"><div class="dot yellow"></div><div class="fi-name">Картофель</div><div class="fi-why">Варёный/запечённый — 1–2 раза в неделю. Богат калием — полезно для надпочечников, но умеренно</div></div>
+      <div class="fz-item"><div class="dot yellow"></div><div class="fi-name">Цельнозерновой хлеб</div><div class="fi-why">1–2 кусочка в день — не больше. Содержит B-витамины, полезнее белого</div></div>
+    </div>
+  </div>
+
+  <div class="food-zone">
+    <div class="fz-header green">🟢 Основа рациона — есть чаще всего</div>
+    <div class="fz-body">
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Яйца (до 3/день)</div><div class="fi-why">Лучший продукт для надпочечников: холин, холестерин для синтеза кортизола, B-витамины</div></div>
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Куриная грудка, индейка, рыба</div><div class="fi-why">Тирозин — аминокислота для синтеза гормонов надпочечников, нежирный белок</div></div>
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Болгарский перец, брокколи, шпинат</div><div class="fi-why">Витамин C + магний — надпочечники расходуют их первыми при любом стрессе</div></div>
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Авокадо</div><div class="fi-why">B5 (пантотеновая кислота) и калий — восстановление надпочечников после истощения</div></div>
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Гречка, овсянка</div><div class="fi-why">Медленные углеводы стабилизируют сахар — надпочечники отдыхают</div></div>
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Орехи, тыквенные семечки</div><div class="fi-why">Магний + цинк + B5 — всё нужно надпочечникам для восстановления</div></div>
+      <div class="fz-item"><div class="dot green"></div><div class="fi-name">Кефир, квашеная капуста</div><div class="fi-why">Пробиотики снижают воспалительную нагрузку и уровень кортизола через кишечник</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ВОДА ======================== -->
+<div id="water">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(96,165,250,0.15);">💧</div>
+    Вода — сколько и когда
+  </div>
+
+  <div class="card" style="background: rgba(96,165,250,0.07); border-color: rgba(96,165,250,0.25);">
+    <h3 style="color: var(--blue);">🎯 Твоя норма: 2.5–3 литра в день</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-top: 8px;">
+      При весе 125 кг — около 2.5–3 л. При усталости надпочечников особенно важно: лёгкое обезвоживание — дополнительный стресс для надпочечников. Начинай день с большого стакана тёплой воды.
+    </p>
+  </div>
+
+  <div class="water-timeline">
+    <div class="water-step"><div class="ws-time">7:30 подъём</div><div class="ws-amount">400 мл</div><div class="ws-label">Тёплая вода сразу после подъёма</div></div>
+    <div class="water-step"><div class="ws-time">До завтрака</div><div class="ws-amount">200 мл</div><div class="ws-label">За 15 мин до еды</div></div>
+    <div class="water-step"><div class="ws-time">10:00–12:00</div><div class="ws-amount">500 мл</div><div class="ws-label">Между завтраком и обедом</div></div>
+    <div class="water-step"><div class="ws-time">До обеда</div><div class="ws-amount">200 мл</div><div class="ws-label">За 15 мин до еды</div></div>
+    <div class="water-step"><div class="ws-time">14:00–17:00</div><div class="ws-amount">500 мл</div><div class="ws-label">Дневная порция</div></div>
+    <div class="water-step"><div class="ws-time">После тренировки</div><div class="ws-amount">400 мл</div><div class="ws-label">Обязательно</div></div>
+    <div class="water-step"><div class="ws-time">До 20:30</div><div class="ws-amount">300 мл</div><div class="ws-label">Последний большой стакан</div></div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 16px;">
+    <div class="card" style="border-color: rgba(52,211,153,0.25);">
+      <h3 style="color: var(--green);">✅ Можно пить</h3>
+      <ul class="plain">
+        <li>Вода (основа)</li>
+        <li>Травяной чай — ромашка, мята, шиповник <span class="ctag">⚡ шиповник богат витамином C</span></li>
+        <li>Зелёный, чёрный чай без сахара</li>
+        <li>Кофе 1 чашка — только после завтрака</li>
+        <li>Минеральная вода без газа</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color: rgba(248,113,113,0.25);">
+      <h3 style="color: var(--red);">❌ Исключить полностью</h3>
+      <ul class="plain">
+        <li>Алкоголь — главный разрушитель надпочечников</li>
+        <li>Сладкие газировки, пакетированные соки</li>
+        <li>Энергетики — экстремальная нагрузка на надпочечники</li>
+        <li>Кофе натощак</li>
+        <li>Чай/кофе с сахаром</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== АНАЛИЗЫ ======================== -->
+<div id="tests">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(79,209,197,0.15);">🔬</div>
+    Какие анализы сдать
+  </div>
+
+  <div class="card" style="background: rgba(248,113,113,0.07); border-color: rgba(248,113,113,0.25); margin-bottom: 20px;">
+    <h3 style="color: var(--red);">🚨 Срочно — до конца апреля 2026</h3>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 4px;">Усталость надпочечников подтверждена клинически, но нужны анализы для глубины оценки</p>
+  </div>
+
+  <div class="analyses-grid">
+    <div class="an-item">
+      <div class="an-icon">⚡</div>
+      <div>
+        <div class="an-name">Кортизол утром (8:00) повторно</div>
+        <div class="an-why">Динамика с ноября 2025. Сдать строго в 8:00–9:00 натощак</div>
+      </div>
+      <div class="an-priority urgent">Срочно</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🔬</div>
+      <div>
+        <div class="an-name">АКТГ (адренокортикотропный гормон)</div>
+        <div class="an-why">Показывает, откуда проблема — надпочечники или гипофиз. По направлению эндокринолога</div>
+      </div>
+      <div class="an-priority urgent">Срочно</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🌞</div>
+      <div>
+        <div class="an-name">Витамин D (25-OH)</div>
+        <div class="an-why">При усталости надпочечников часто дефицит. Принимаешь добавку, но уровень неизвестен</div>
+      </div>
+      <div class="an-priority urgent">Срочно</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🩸</div>
+      <div>
+        <div class="an-name">Ферритин</div>
+        <div class="an-why">Запасы железа. Алкоголь и стресс истощают железо — может быть причиной сильной усталости</div>
+      </div>
+      <div class="an-priority urgent">Срочно</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🧬</div>
+      <div>
+        <div class="an-name">Липидный профиль</div>
+        <div class="an-why">ЛПВП, ЛПНП, триглицериды — при инсулинорезистентности нарушены</div>
+      </div>
+      <div class="an-priority urgent">Срочно</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🦋</div>
+      <div>
+        <div class="an-name">ТТГ + свТ4 (повторно)</div>
+        <div class="an-why">Последний — май 2024. Хронический стресс влияет на щитовидную железу</div>
+      </div>
+      <div class="an-priority soon">Скоро</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🌸</div>
+      <div>
+        <div class="an-name">Половые гормоны</div>
+        <div class="an-why">Эстрадиол, прогестерон, пролактин, ФСГ, ЛГ. Алкоголь нарушает гормональный фон у женщин</div>
+      </div>
+      <div class="an-priority soon">Скоро</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">📊</div>
+      <div>
+        <div class="an-name">HOMA-IR (повторно через 3 мес)</div>
+        <div class="an-why">Динамика инсулинорезистентности — должен снижаться</div>
+      </div>
+      <div class="an-priority soon">Через 3 мес</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🔥</div>
+      <div>
+        <div class="an-name">СРБ (через 3 мес)</div>
+        <div class="an-why">Контроль воспаления — должен снижаться по мере снижения веса и отказа от алкоголя</div>
+      </div>
+      <div class="an-priority soon">Через 3 мес</div>
+    </div>
+    <div class="an-item">
+      <div class="an-icon">🍃</div>
+      <div>
+        <div class="an-name">Магний в крови</div>
+        <div class="an-why">Алкоголь и стресс вымывают магний. При его дефиците надпочечники не восстанавливаются</div>
+      </div>
+      <div class="an-priority soon">Желательно</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 16px; background: rgba(124,106,245,0.07); border-color: rgba(124,106,245,0.25);">
+    <h3>👩‍⚕️ К каким врачам записаться</h3>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px;">
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 14px;">
+        <strong>Эндокринолог — приоритет №1</strong>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 3px;">Инсулинорезистентность + усталость надпочечников + кортизол. Взять с собой анализы ноябрь 2025.</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 14px;">
+        <strong>Аллерголог</strong>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 3px;">Контроль IgE 2050, астма — хроническое воспаление истощает надпочечники дополнительно</div>
+      </div>
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 14px;">
+        <strong>Терапевт</strong>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 3px;">Общий контроль, давление, направления на анализы</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ДОБАВКИ ======================== -->
+<div id="supps">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(246,173,85,0.15);">💊</div>
+    Твои добавки — когда и как принимать
+  </div>
+
+  <div class="card" style="background: rgba(232,121,249,0.07); border-color: rgba(232,121,249,0.3); margin-bottom: 20px;">
+    <p style="font-size: 14px; color: var(--muted);">
+      🌸 <strong style="color: var(--cortisol);">С учётом усталости надпочечников:</strong> витамин C повышен до 1000 мг, магний — вечером строго, витамин D — утром с жирной едой. После выздоровления от алкоголя дополнительно нужны B5 и B6 — обсудить с врачом.
+    </p>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">🐟</div>
+      <div class="supp-name">Омега-3</div>
+      <div class="supp-dose">1–2 г EPA+DHA в день</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Когда:</strong> обед или ужин</div>
+        <div class="supp-tag">🔄 <strong>Как:</strong> с жирной едой</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> постоянно</div>
+      </div>
+      <div class="supp-note">Снижает воспаление (СРБ 6.52), улучшает чувствительность к инсулину. <span class="ctag">⚡ Снижает воспалительную нагрузку на надпочечники</span></div>
+    </div>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">🌞</div>
+      <div class="supp-name">Витамин D</div>
+      <div class="supp-dose">По анализу — сдать сначала!</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Когда:</strong> утром с завтраком</div>
+        <div class="supp-tag">🔄 <strong>Как:</strong> с жирной едой (яйца, авокадо)</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> 3 мес → повторный анализ</div>
+      </div>
+      <div class="supp-note">⚠️ Сначала сдать 25-OH витамин D. При дефиците (&lt;30 нг/мл) нужно 4000–5000 МЕ. Вечером не принимать — нарушает сон. <span class="ctag">⚡ Поддерживает работу надпочечников и иммунитет</span></div>
+    </div>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">🍊</div>
+      <div class="supp-name">Витамин C</div>
+      <div class="supp-dose">1000 мг/день (повышено!)</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Когда:</strong> утром с завтраком</div>
+        <div class="supp-tag">🔄 <strong>Как:</strong> во время еды</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> постоянно</div>
+      </div>
+      <div class="supp-note"><span class="ctag">⚡ Надпочечники содержат самую высокую концентрацию витамина C в организме</span> — они тратят его первыми при стрессе. 7 лет стресса и алкоголя = хронический дефицит витамина C в надпочечниках. 1000 мг — обоснованная доза для восстановления.</div>
+    </div>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">🧘</div>
+      <div class="supp-name">Магний</div>
+      <div class="supp-dose">300–400 мг/день</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Когда:</strong> вечером за 40 мин до сна</div>
+        <div class="supp-tag">🔄 <strong>Как:</strong> с едой или водой</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> 3 месяца</div>
+      </div>
+      <div class="supp-note"><span class="ctag">⚡ Магний регулирует выработку кортизола и снижает его при хроническом стрессе</span>. Алкоголь активно вымывает магний — у тебя вероятен дефицит. Цитрат или глицинат магния — лучшая форма. Вечером — расслабляет, улучшает сон, помогает восстановлению надпочечников ночью.</div>
+    </div>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">🧡</div>
+      <div class="supp-name">Кверцетин</div>
+      <div class="supp-dose">500–1000 мг/день</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Когда:</strong> с обедом</div>
+        <div class="supp-tag">🔄 <strong>Как:</strong> с едой</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> 2–3 месяца</div>
+      </div>
+      <div class="supp-note">Противоаллергическое, противовоспалительное. Снижает воспалительную нагрузку — косвенно помогает надпочечникам. Не натощак.</div>
+    </div>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">🧫</div>
+      <div class="supp-name">Нормофлорин Л + Нормофлорин Д</div>
+      <div class="supp-dose">По инструкции</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Нормофлорин Л:</strong> утром до еды</div>
+        <div class="supp-tag">⏰ <strong>Нормофлорин Д:</strong> вечером до еды или перед сном</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> 1 месяц → перерыв</div>
+      </div>
+      <div class="supp-note"><span class="ctag">⚡ Пробиотики снижают кортизол через кишечно-мозговую ось</span> — это доказанный механизм. 7 лет алкоголя серьёзно нарушают микробиоту. Восстановление кишечника = снижение воспаления = меньше нагрузки на надпочечники. Принимать до еды — за 15–20 мин.</div>
+    </div>
+  </div>
+
+  <div class="supp-card">
+    <div class="supp-header">
+      <div class="supp-emoji">✨</div>
+      <div class="supp-name">Коллаген</div>
+      <div class="supp-dose">5–10 г/день</div>
+    </div>
+    <div class="supp-body">
+      <div class="supp-row">
+        <div class="supp-tag">⏰ <strong>Когда:</strong> утром с завтраком</div>
+        <div class="supp-tag">🔄 <strong>Как:</strong> растворить в воде или йогурте</div>
+        <div class="supp-tag">📅 <strong>Курс:</strong> 3–6 месяцев</div>
+      </div>
+      <div class="supp-note">Поддержка кожи при снижении веса, суставы, связки. Принимай вместе с витамином C — он улучшает синтез коллагена.</div>
+    </div>
+  </div>
+
+  <div class="card" style="background: rgba(232,121,249,0.07); border-color: rgba(232,121,249,0.3); margin-top: 4px;">
+    <h3 style="color: var(--cortisol);">➕ Обсудить с врачом — для восстановления надпочечников</h3>
+    <div class="fz-item" style="border-bottom: 1px solid var(--border); padding: 10px 0;">
+      <div class="dot" style="background:var(--cortisol);"></div>
+      <div><strong>Витамин B5 (пантотеновая кислота)</strong> — 250–500 мг/день утром. Ключевой витамин для синтеза кортизола. Алкоголь разрушает его запасы. По назначению врача.</div>
+    </div>
+    <div class="fz-item" style="padding: 10px 0;">
+      <div class="dot" style="background:var(--cortisol);"></div>
+      <div><strong>Витамин B6 (пиридоксин)</strong> — участвует в работе надпочечников. Обсудить с эндокринологом.</div>
+    </div>
+  </div>
+</div>
+
+<!-- РЕЖИМ ДНЯ ДЛЯ НАДПОЧЕЧНИКОВ -->
+<div style="margin-top: 48px;">
+  <div class="section-title">
+    <div class="icon" style="background: rgba(232,121,249,0.15);">🌅</div>
+    Режим дня — это лечение, не просто привычка
+  </div>
+
+  <div class="cortisol-banner">
+    <div class="cb-icon">🌸</div>
+    <div>
+      <div class="cb-title">Суточный ритм кортизола нужно восстановить</div>
+      <div class="cb-text">Кортизол должен быть высоким утром и снижаться к вечеру. 7 лет нарушений сбили этот ритм. Восстанавливается строгим режимом дня — минимум 4–6 недель стабильного режима дают первые результаты.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 16px;">
+    <h3>⏰ Идеальный распорядок дня</h3>
+    <div class="timeline" style="margin-top: 12px;">
+      <div class="tl-item"><div class="tl-time">7:00–7:30 — подъём</div><div class="tl-text">Строго в одно время. Сразу открыть шторы — дневной свет запускает кортизол. <span class="ctag">⚡ Свет утром = сигнал надпочечникам начать работу</span></div></div>
+      <div class="tl-item"><div class="tl-time">7:30 — большой стакан воды</div><div class="tl-text">400 мл тёплой воды натощак. Нормофлорин Л.</div></div>
+      <div class="tl-item"><div class="tl-time">8:00–9:00 — завтрак</div><div class="tl-text">Обязательно, не позже 9:00. Белок + жир + медленные углеводы. <span class="ctag">⚡ Завтрак стабилизирует кортизол на весь день</span></div></div>
+      <div class="tl-item"><div class="tl-time">9:00–9:30 — витамин D, витамин C, коллаген</div><div class="tl-text">После завтрака, не натощак. Кофе — только здесь, не раньше.</div></div>
+      <div class="tl-item"><div class="tl-time">10:00–13:00 — тренировка (если есть)</div><div class="tl-text">Лучшее окно. После тренировки — перекус с белком.</div></div>
+      <div class="tl-item"><div class="tl-time">13:00–15:00 — обед</div><div class="tl-text">Основной приём. Омега-3, кверцетин.</div></div>
+      <div class="tl-item"><div class="tl-time">15:00–20:00 — спокойное время</div><div class="tl-text">Снизить стресс-нагрузку. Тревожные новости, конфликты — откладывать на завтра.</div></div>
+      <div class="tl-item"><div class="tl-time">19:00–20:00 — ужин</div><div class="tl-text">Лёгкий. Нормофлорин Д за 20 мин до еды.</div></div>
+      <div class="tl-item"><div class="tl-time">21:00–21:30 — магний</div><div class="tl-text"><span class="ctag">⚡ Магний вечером снижает кортизол и готовит надпочечники к восстановлению во сне</span></div></div>
+      <div class="tl-item"><div class="tl-time">22:30 — ложиться спать</div><div class="tl-text">Без телефона за 30 мин до сна. Сейчас ты ложишься в 00:00 — сдвигай по 15 мин в неделю. <span class="ctag">⚡ 80% восстановления надпочечников происходит во сне до полуночи</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ALERT -->
+<div class="alert">
+  <div class="alert-icon">⚠️</div>
+  <div class="alert-text">
+    <strong>Это не медицинское назначение.</strong> Усталость надпочечников — функциональное состояние, которое поправляется образом жизни. Но для исключения органической патологии (болезнь Аддисона) нужна консультация эндокринолога с анализами на АКТГ и кортизол. <strong>Первый шаг — запись к эндокринологу с анализами ноябрь 2025.</strong>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Составлено с учётом усталости надпочечников (кортизол 4.7 мкг/дл, ноябрь 2025) • Инсулинорезистентность HOMA-IR 4.1<br>
+  🌿 Юлия Сергеевна • 31 год • ИМТ 44.3 • Цель: −12–16 кг за 4 месяца
+</footer>
+
+</body>
+</html>
